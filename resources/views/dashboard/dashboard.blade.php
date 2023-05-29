@@ -1,4 +1,4 @@
-@extend('kerangka.master')
+@extends('kerangka.master')
 
 @section('content')
 <div class="page-content">

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\barangController;
+use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\loginController;
 use App\Http\Controllers\registerController;
 use Illuminate\Support\Facades\Route;
@@ -20,11 +21,15 @@ use Illuminate\Support\Facades\Route;
 //     return view('kerangka.master');
 // });
 
-Route::get('/', function () {
-    return view('kerangka.barang');
-});
+// Route::get('/', function () {
+//     return view('kerangka.barang');
+// });
+
+route::get('/dashboard', [dashboardController::class, 'index']);
 
 Route::get('/barang',[barangController::class,'index']);
 
-Route::get('/login', [loginController::class, 'login'])->name('login'); 
+Route::get('/', [loginController::class, 'login'])->name('login'); 
 Route::get ('/register',[registerController::class,'register'])->name('register');
+
+Route::post ('/regist',[registerController::class,'store'])->name('register.store');
