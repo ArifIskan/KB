@@ -22,18 +22,33 @@
             <h1 class="auth-title">Log in.</h1>
             <p class="auth-subtitle mb-5">Log in with your data that you entered during registration.</p>
 
-            <form action="index.html">
+            <form method="post" action="{{ route('login.store')}}">
+                @csrf
+                @if (session()->has('loginfailed')) {
+                    <div class="alert alert-primary" role="alert">
+                  {{$message}}
+                      </div>
+                }
+                @endif
                 <div class="form-group position-relative has-icon-left mb-4">
-                    <input type="text" class="form-control form-control-xl" placeholder="Username">
+                    <input type="text" id="email" name="email" class="form-control @error ('email') is invalid
+                    @enderror form-control-xl" placeholder="email">
                     <div class="form-control-icon">
                         <i class="bi bi-person"></i>
                     </div>
+                    @error('email')
+                    <small class="text-danger">{{ $message }} </small>
+                    @enderror
                 </div>
                 <div class="form-group position-relative has-icon-left mb-4">
-                    <input type="password" class="form-control form-control-xl" placeholder="Password">
+                    <input type="password" id="password" name="password" class="form-control  @error ('password') is invalid
+                    @enderror form-control-xl" placeholder="Password">
                     <div class="form-control-icon">
                         <i class="bi bi-shield-lock"></i>
                     </div>
+                    @error('password')
+                    <small class="text-danger">{{ $message }} </small>
+                    @enderror
                 </div>
                 <div class="form-check form-check-lg d-flex align-items-end">
                     <input class="form-check-input me-2" type="checkbox" value="" id="flexCheckDefault">
